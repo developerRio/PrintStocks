@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Pair with Bluetooth"
+        android:text="@string/pair_with_bluetooth"
         app:switchPadding="16dp" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="Enter some text to Print"
+        android:text="@string/enter_some_text_to_print"
         android:textColor="@color/text_black"
         android:textSize="24sp" />
 
@@ -66,7 +66,7 @@
         android:layout_below="@+id/printing_edit_text_layout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Print text Now"
+        android:text="@string/print_text_now"
         android:textAllCaps="false" />
 
     <com.google.android.material.button.MaterialButton
@@ -77,16 +77,28 @@
         android:layout_below="@+id/print_text_button"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
-        android:text="Print below Image"
+        android:text="@string/print_below_image"
         android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/preview_header_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/print_image_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/inst_print_preview"
+        android:textColor="@color/text_black"
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/printable_image_view"
         android:layout_width="100dp"
-        android:layout_marginTop="25dp"
-        android:scaleType="centerCrop"
-        android:layout_below="@+id/print_image_button"
+        android:layout_height="100dp"
+        android:layout_below="@+id/preview_header_text_view"
         android:layout_centerHorizontal="true"
-        android:layout_height="100dp"/>
+        android:layout_marginTop="25dp"
+        android:background="@color/white"
+        android:scaleType="centerCrop" />
 
 </RelativeLayout>

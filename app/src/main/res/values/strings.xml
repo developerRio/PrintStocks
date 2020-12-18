@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PrintStocksDemo</string>
+    <string name="pair_with_bluetooth">Pair with Bluetooth</string>
+    <string name="enter_some_text_to_print">Enter some text to Print</string>
+    <string name="print_text_now">Print text Now</string>
+    <string name="print_below_image">Print below Image</string>
+    <string name="inst_print_preview">As you can see the preview same image color you\'ll see on print slip.</string>
 </resources>

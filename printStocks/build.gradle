@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
 }
 
@@ -8,7 +8,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.originalstocks.printstocksdemo"
+        //applicationId "com.originalstocks.printstocks"
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1
@@ -46,9 +46,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // PrintStocks Lib
-    implementation project (':printStocks')
+    /*Libs which are needed for module*/
 
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    // reading storage
+    implementation 'io.paperdb:paperdb:2.6'
+
+    // Swipe refresh layout dependency
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
 }

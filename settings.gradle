@@ -1,2 +1,3 @@
+include ':printStocks'
 include ':app'
 rootProject.name = "PrintStocksDemo"
