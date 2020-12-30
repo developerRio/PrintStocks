@@ -18,6 +18,7 @@ import com.originalstocks.printstocks.ui.ScannerActivity
 import com.originalstocks.printstocks.utilities.Printing
 import com.originalstocks.printstocks.utilities.PrintingCallback
 import com.originalstocks.printstocksdemo.databinding.ActivityMainBinding
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 
@@ -161,7 +162,7 @@ class MainActivity : AppCompatActivity(), PrintingCallback {
         /*fetching a dummy image from net to print via Picasso*/
 
         // can accept the URI, too
-        Picasso.get().load(imageLink).resize(100, 100).into(object : Target {
+        Picasso.get().load(R.drawable.dummy_slip).resize(100, 100).into(object : Target {
             override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
                 if (bitmap != null) {
                     binding.printableImageView.setImageBitmap(bitmap)
@@ -189,11 +190,42 @@ class MainActivity : AppCompatActivity(), PrintingCallback {
         val printableArrayList: ArrayList<Printable> = ArrayList()
         printableArrayList.add(RawPrintable.Builder(byteArrayOf(27, 100, 4)).build())
 
+        val textBoldHeader = "SUR PLACE\nESP123"
+        val textNormalContent = "RESTAURANT NAME\n5 rue sala,\nTel.04.74.98.22.22\nSTREET 43201425400035 - APE 5610C\n" +
+                "  RCS LYON TVA INTRA FR27432078939"
+
+        val textTableContent = "#254896-11     10/12/2020 12:56:13\n" +
+                "\n" +
+                "QTE PRODUIT     UNIT   TOTAL\n" +
+                "1X Burger BIO   7.50   8.50\n" +
+                "    Bacon\n" +
+                "    Chili Sauce\n" +
+                "    Sup Oeuf    1.00\n" +
+                "2X Green Burger 8.00   16.00\n" +
+                "    Barbecue\n" +
+                "    Sup Oeuf\n" +
+                "\n" +
+                "Total TTC              28.30\n" +
+                "TVA                     8.60\n" +
+                "Total HT               19.70"
+
+
         // adding text to printable
-        val printable = TextPrintable.Builder()
-            .setText(textToPrint) //The text you want to print
+        val printableHeader = TextPrintable.Builder()
+            .setText(textBoldHeader) //The text you want to print
             .setAlignment(DefaultPrinter.ALIGNMENT_CENTER)
             .setEmphasizedMode(DefaultPrinter.EMPHASIZED_MODE_BOLD) //Bold or normal
+            .setFontSize(DefaultPrinter.FONT_SIZE_LARGE)
+            .setUnderlined(DefaultPrinter.UNDERLINED_MODE_OFF) // Underline on/off
+            .setCharacterCode(DefaultPrinter.CHARCODE_PC437) // Character code to support languages /** CHARCODE_PC863 for Canadian-French*/
+            .setLineSpacing(DefaultPrinter.LINE_SPACING_60)
+            .setNewLinesAfter(2) // To provide n lines after sentence
+            .build()
+
+        val printableContent = TextPrintable.Builder()
+            .setText(textNormalContent) //The text you want to print
+            .setAlignment(DefaultPrinter.ALIGNMENT_CENTER)
+            .setEmphasizedMode(DefaultPrinter.EMPHASIZED_MODE_NORMAL) //Bold or normal
             .setFontSize(DefaultPrinter.FONT_SIZE_NORMAL)
             .setUnderlined(DefaultPrinter.UNDERLINED_MODE_OFF) // Underline on/off
             .setCharacterCode(DefaultPrinter.CHARCODE_PC437) // Character code to support languages /** CHARCODE_PC863 for Canadian-French*/
@@ -201,7 +233,21 @@ class MainActivity : AppCompatActivity(), PrintingCallback {
             .setNewLinesAfter(1) // To provide n lines after sentence
             .build()
 
-        printableArrayList.add(printable)
+        val printableTable = TextPrintable.Builder()
+            .setText(textTableContent) //The text you want to print
+            .setAlignment(DefaultPrinter.ALIGNMENT_CENTER)
+            .setEmphasizedMode(DefaultPrinter.EMPHASIZED_MODE_NORMAL) //Bold or normal
+            .setFontSize(DefaultPrinter.FONT_SIZE_NORMAL)
+            .setUnderlined(DefaultPrinter.UNDERLINED_MODE_OFF) // Underline on/off
+            .setCharacterCode(DefaultPrinter.CHARCODE_PC437) // Character code to support languages /** CHARCODE_PC863 for Canadian-French*/
+            .setLineSpacing(DefaultPrinter.LINE_SPACING_60)
+            .setNewLinesAfter(1) // To provide n lines after sentence
+            .build()
+
+        printableArrayList.add(printableHeader)
+        printableArrayList.add(printableContent)
+        printableArrayList.add(printableTable)
+
         printing?.print(printableArrayList)
         initPrintingProcess()
     }
